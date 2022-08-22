@@ -1,9 +1,10 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flutter/material.dart';
 import 'package:pacman_copy/spritesHero.dart';
 
 import 'objects.dart';
 
-class GamePlayer extends SimplePlayer with ObjectCollision {
+class GamePlayer extends SimplePlayer with ObjectCollision, Lighting {
   bool canAtack = true;
 
   GamePlayer({required Vector2 position, required Vector2 size})
@@ -28,6 +29,10 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
         ],
       ),
     );
+    setupLighting(LightingConfig(
+      radius: 24,
+      color: Colors.transparent,
+    ));
   }
 
   @override
@@ -66,7 +71,8 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
   @override
   void joystickAction(JoystickActionEvent event) {
     if (canAtack) {
-      if (event.event == ActionEvent.DOWN && event.id == 1) {
+      if (event.event == ActionEvent.DOWN &&
+          (event.id == 1 || event.id == 32)) {
         _executeAtack();
       }
     }

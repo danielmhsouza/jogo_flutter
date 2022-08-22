@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flutter/material.dart';
 
 class ObjectAny {
   final double x;
@@ -21,5 +22,19 @@ class ObjectAny {
     }
 
     return false;
+  }
+}
+
+class Fire extends GameDecoration with Lighting {
+  Fire({required Vector2 position, required Vector2 size})
+      : super(
+          position: position,
+          size: size,
+        ) {
+    setupLighting(LightingConfig(
+      radius: 24,
+      color: Colors.orange.withOpacity(0.4),
+      withPulse: true,
+    ));
   }
 }

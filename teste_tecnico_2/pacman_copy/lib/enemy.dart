@@ -19,8 +19,8 @@ class GameEnemy extends SimpleEnemy with ObjectCollision {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(size[0] - 7, size[1] - 13),
-            align: Vector2(5, 13),
+            size: Vector2(size[0] - 15, size[1] - 13),
+            align: Vector2(5, 9),
           ),
         ],
       ),
@@ -34,7 +34,7 @@ class GameEnemy extends SimpleEnemy with ObjectCollision {
         closePlayer: (player) {
           _executeAtack();
         },
-        radiusVision: 15 * 16,
+        radiusVision: 10 * 16,
       );
     }
     super.update(dt);

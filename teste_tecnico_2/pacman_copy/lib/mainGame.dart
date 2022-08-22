@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
+import 'package:pacman_copy/objects.dart';
 import 'package:pacman_copy/player.dart';
 
 import 'enemy.dart';
@@ -14,6 +15,7 @@ class GameController extends StatelessWidget {
     return BonfireTiledWidget(
       //***************************************************JOYSTICK
       joystick: Joystick(
+        keyboardConfig: KeyboardConfig(),
         directional: JoystickDirectional(color: Colors.red),
         actions: [
           JoystickAction(
@@ -25,9 +27,16 @@ class GameController extends StatelessWidget {
       ),
 
       //***************************************************MAP
-      map: TiledWorldMap(
-        'maps/map.json',
-      ),
+      map: TiledWorldMap('maps/map.json', objectsBuilder: {
+        'ogre': ((properties) => GameEnemy(
+              position: properties.position,
+              size: Vector2(properties.size[0] + 8, properties.size[1] + 8),
+            )),
+        'fireLight': ((properties) => Fire(
+              position: properties.position,
+              size: Vector2(properties.size[0] + 8, properties.size[1] + 8),
+            )),
+      }),
 
       //***************************************************PLAYER
       player: GamePlayer(
@@ -38,30 +47,11 @@ class GameController extends StatelessWidget {
       //***************************************************CAMERA
       cameraConfig: CameraConfig(
         moveOnlyMapArea: true,
-        zoom: 1.7,
+        zoom: 1.9,
         sizeMovementWindow: Vector2(tileSize * 4, tileSize * 4),
       ),
+      lightingColorGame: Colors.black.withOpacity(0.5),
 
-      //***************************************************COMPONENTS
-      components: [
-        //***********************************ENEMIES
-        GameEnemy(
-          position: Vector2(17 * tileSize, 26 * tileSize),
-          size: Vector2(tileSize + 8, tileSize + 8),
-        ),
-        GameEnemy(
-          position: Vector2(19 * tileSize, 26 * tileSize),
-          size: Vector2(tileSize + 8, tileSize + 8),
-        ),
-        GameEnemy(
-          position: Vector2(21 * tileSize, 26 * tileSize),
-          size: Vector2(tileSize + 8, tileSize + 8),
-        ),
-        GameEnemy(
-          position: Vector2(23 * tileSize, 26 * tileSize),
-          size: Vector2(tileSize + 8, tileSize + 8),
-        ),
-      ],
       showCollisionArea: false,
     );
   }
