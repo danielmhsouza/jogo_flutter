@@ -18,10 +18,10 @@ $ dart run main.dart
 <h2>Teste 2</h2>
 
 <p>Clone este repositorio.</p>
-<p>Entre na pasta flacman</p>
+<p>Entre na pasta pacman_copy</p>
 
 ~~~
-$ cd teste_tecnico_2/flacman
+$ cd teste_tecnico_2/pacman_copy
 ~~~
 
 Rode o programa com o flutter<p>
